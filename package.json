@@ -1,0 +1,12 @@
+{
+  "name": "WebdriverIO-project",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/local-runner": "^9.0.5",
+    "@wdio/mocha-framework": "^9.0.5",
+    "@wdio/spec-reporter": "^9.0.4"
+  },
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  }
+}
