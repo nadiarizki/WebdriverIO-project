@@ -12,8 +12,7 @@ import { expect } from '@wdio/globals'
 describe('Test Saucedemo', () => {
     it('Test 1 - Success login', async () => {
         await browser.url('https://www.saucedemo.com/');
-        //5000 = 5s
-        await browser.pause(5000);
+        //3000 = 3s
 
         // get element by id
         const usernameTextbox = await browser.$('#user-name');
@@ -26,13 +25,14 @@ describe('Test Saucedemo', () => {
 
         // user login
         //await browser.$("#user-name").addValue("standard_user");
+        await usernameTextbox.waitForDisplayed({ timeout: 3000 });
         await usernameTextbox.clearValue();
         await usernameTextbox.addValue("standard_user");
         await browser.$("#password").addValue("secret_sauce");
         await loginButton.click();
         
         // validate user is redirected to inventory page
-        await browser.pause(5000);
+        await browser.pause(3000);
         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html');
         await expect(browser).toHaveTitle('Swag Labs');
 
