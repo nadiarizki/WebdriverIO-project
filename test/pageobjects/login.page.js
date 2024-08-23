@@ -1,40 +1,46 @@
-import { $ } from '@wdio/globals'
+import { $, expect, browser } from '@wdio/globals'
 import Page from './page.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
 class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
+
+    // deifine selectors
     get inputUsername () {
-        return $('#username');
+        return $('#user-name');
     }
 
     get inputPassword () {
         return $('#password');
     }
 
-    get btnSubmit () {
-        return $('button[type="submit"]');
+    get loginButton () {
+        return $('//input[@type="submit"]');
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
+    get errorMessage () {
+        return $('//*[@id="login_button_container"]/div/form/div[3]/h3');
+    }
+
+    //login using username and password
     async login (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+        await this.loginButton.click();
     }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
+
+    //validate incorrect password error message is displayed
+    async validateWrongPasswordError () {
+        await expect(this.errorMessage).toHaveText(
+            expect.stringContaining('Epic sadface: Username and password do not match any user in this service')
+        )
+    }
+
+    //open login page
     open () {
-        return super.open('login');
+        return super.open('');
     }
 }
 
