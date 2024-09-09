@@ -2,7 +2,9 @@ import { expect, browser } from '@wdio/globals'
 
 describe('Test Saucedemo', () => {
     it('Test 1 - Success login', async () => {
-        await browser.url('https://www.saucedemo.com/');
+        await browser.url(process.env.BASE_URL);
+
+        
         //3000 = 3s
         await browser.pause(3000);
 

@@ -7,9 +7,13 @@
     "@wdio/spec-reporter": "^9.0.4"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
+    "test": "npm run ./wdio.conf.js",
+    "wdio": "wdio run ./wdio.conf.js",
+    "allure-report": "allure generate allure-results/ --clean && allure open"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "@wdio/allure-reporter": "^9.0.4",
+    "dotenv": "^16.4.5",
+    "WebdriverIO-project": "file:"
   }
 }
